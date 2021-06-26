@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+void printKMax(vector<int> &vec, int n, int k){
+    int max = *max_element(vec.begin(),vec.begin()+k);
+    cout<<max<<" ";
+    for(int i=1;i<(n-k+1);i++){
+        if(vec[i-1]==max){
+            max = *max_element(vec.begin() + i, vec.begin() + i + k);
+            cout << max << " ";
+        }
+        else {
+            if(max>vec[i+k-1])
+                cout<<max<<" ";
+            else{
+                max=vec[i+k-1];
+                cout<<max<<" ";
+            }
+        }
+    }
+    cout<<endl;
+}
+
+int main(){
+
+    int t;
+    cin >> t;
+    while(t>0) {
+        int n,k;
+        cin >> n >> k;
+        int i;
+        vector<int> vec(n);
+        for(i=0;i<n;i++)
+            cin >> vec[i];
+        printKMax(vec, n, k);
+        t--;
+    }
+    return 0;
+}
